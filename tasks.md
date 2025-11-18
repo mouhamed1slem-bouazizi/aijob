@@ -1,5 +1,16 @@
 # Implementation Plan
 
+env
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+OPENAI_API_KEY=sk-your-chatanywhere-key
+OPENAI_API_BASE=https://api.chatanywhere.org/v1
+OPENAI_MODEL=gpt-5-mini
+
 ## Overview
 
 This implementation plan breaks down the AI-powered Job Search & Career Assistant Platform into discrete, manageable coding tasks. Each task builds incrementally on previous work, following test-driven development practices where appropriate. All context documents (requirements and design) will be available during implementation.
