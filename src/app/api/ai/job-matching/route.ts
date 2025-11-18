@@ -24,14 +24,14 @@ export async function POST(req: Request) {
   const prompt = `Candidate profile: ${JSON.stringify(profile)}. Preferences: ${JSON.stringify(
     preferences
   )}. Recommend 5 matching roles as JSON array with fields title, company, matchReason, link.`;
-  const res = await client.responses.create({
+  const res = await client.chat.completions.create({
     model: defaultModel,
-    input: [
+    messages: [
       { role: "system", content: systemPrompt("Recommend roles based on skills and experience") },
       { role: "user", content: prompt },
     ],
   });
-  const text = res.output_text;
+  const text = res.choices?.[0]?.message?.content ?? "";
   try {
     const matches = JSON.parse(text);
     return NextResponse.json({ matches });

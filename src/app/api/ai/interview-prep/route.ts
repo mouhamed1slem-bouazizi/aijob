@@ -10,12 +10,12 @@ export async function POST(req: Request) {
       reply: "Provide role and your answer. Set OPENAI_API_KEY for interactive coaching.",
     });
   const prompt = `Role: ${role}. Candidate answer: ${transcript}. Give coaching feedback and a stronger sample answer.`;
-  const res = await client.responses.create({
+  const res = await client.chat.completions.create({
     model: defaultModel,
-    input: [
+    messages: [
       { role: "system", content: systemPrompt("Be a pragmatic interview coach") },
       { role: "user", content: prompt },
     ],
   });
-  return NextResponse.json({ reply: res.output_text });
+  return NextResponse.json({ reply: res.choices?.[0]?.message?.content ?? "" });
 }

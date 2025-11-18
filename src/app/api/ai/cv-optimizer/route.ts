@@ -15,12 +15,12 @@ export async function POST(req: Request) {
       note: "Set OPENAI_API_KEY for AI optimization.",
     });
   const prompt = `Resume: ${resume}\nTarget role: ${targetRole}. Provide bullet suggestions to optimize.`;
-  const res = await client.responses.create({
+  const res = await client.chat.completions.create({
     model: defaultModel,
-    input: [
+    messages: [
       { role: "system", content: systemPrompt("Optimize resumes for ATS and impact") },
       { role: "user", content: prompt },
     ],
   });
-  return NextResponse.json({ suggestions: res.output_text });
+  return NextResponse.json({ suggestions: res.choices?.[0]?.message?.content ?? "" });
 }

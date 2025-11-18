@@ -11,12 +11,12 @@ export async function POST(req: Request) {
       note: "Set OPENAI_API_KEY for detailed analysis.",
     });
   const prompt = `Profile: ${JSON.stringify(profile)} Target role: ${targetRole}. List top skill gaps and learning plan.`;
-  const res = await client.responses.create({
+  const res = await client.chat.completions.create({
     model: defaultModel,
-    input: [
+    messages: [
       { role: "system", content: systemPrompt("Identify gaps and propose training plan") },
       { role: "user", content: prompt },
     ],
   });
-  return NextResponse.json({ plan: res.output_text });
+  return NextResponse.json({ plan: res.choices?.[0]?.message?.content ?? "" });
 }
